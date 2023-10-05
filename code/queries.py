@@ -37,8 +37,8 @@ with flights_etl_order as (
 	    , airport_lon
 	    , round(avg(max_10d_rating), 1) as "Rating"
 	    , round(avg(max_10d_rating), 1) + (case when count(*) > 50 then 1.5 when count(*) > 10 then 1 when count(5) > 5 then 0.25 when count(5) > 2 then -0.5 else -1.5 end) as "Ordering"
-	    , round(avg(dist)::numeric, 0)::varchar || ' mi' as "Avg Dist"
-	    , count(*) as "Spots"
+	    , round(avg(dist)::numeric, 0)::varchar || ' mi' as "Dist to Breaks"
+	    , count(*) as "Breaks"
 	    , round(avg(perc_5_plus)*100, 1)::varchar as "% 5+"
 	    
 --	    , sum(sum_10d_rating) / sum(n) as avg_10d_rating

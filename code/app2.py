@@ -30,21 +30,32 @@ def server():
     cursor.close()
 
     df = pd.DataFrame(airports_data, columns=[desc[0] for desc in cursor.description])
+    df['Rating'] = df['Rating'].astype(float)
+
     # import pdb; pdb.set_trace()
 
     # return df[['Airport', 'City', 'Rating', 'Ordering', 'Spot Dist', 'Spots', '% 5+',
     #        'avg_of_best_session_for_each_break', 'Best', 'max_10d_rating',
     #        'num_good_surf_spots', 'avg_dist', 'array_agg', 'Out Price',
     #        'Return Price']].fillna('')
+    option = st.selectbox(
+        "Home Airport",
+        ("SAN", "LAX", "SFO"),
+        index=None,
+        placeholder="Select Your Home Airport...",
+    )
 
-    st.write(df[['City', 'Airport', 'Rating', 'Best', 'Outbound', 'Return', 'Spots', 'Avg Dist']])
+    st.write(df[['City', 'Airport', 'Rating', 'Best', 'Outbound', 'Return', 'Breaks', 'Dist to Breaks']])
 
-    df['Rating'] = df['Rating'].astype(float)
+    # map_df = df.nlargest(15, 'Rating')
+    # map_df = map_df[['airport_lat', 'airport_lon', 'Airport']]
+    # map_df.columns = ['lat', 'lon', 'Airport']
+    n_spots = 15
+    n_spots = st.slider('Top N Airports', 0, df.shape[0], n_spots)
 
-    map_df = df.nlargest(15, 'Rating')
-    map_df = map_df[['airport_lat', 'airport_lon', 'Airport']]
-    map_df.columns = ['lat', 'lon', 'Airport']
-    st.map(map_df)
+    st.map(df.nlargest(n_spots, 'Rating'), latitude='airport_lat', longitude='airport_lon')
+
+    # st.write("I'm ", age, 'years old')
 
 
 if __name__ == '__main__':
