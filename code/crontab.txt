@@ -1,0 +1,2 @@
+DISPLAY=:0 google-chrome
+0 22 * * *  source ~/env3.9/bin/activate && python3 /Users/alexvossmeyer/startups/surf-app/code/top_surf_airports.py > /Users/alexvossmeyer/startups/surf-app/code/output.txt
