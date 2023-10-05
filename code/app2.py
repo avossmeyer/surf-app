@@ -1,10 +1,5 @@
 import streamlit as st
-
-import matplotlib.pyplot as plt
-import numpy as np
-from shiny import App, render, ui
 import psycopg2
-from IPython import display
 import pandas as pd
 
 # display.set_matplotlib_formats("svg")
