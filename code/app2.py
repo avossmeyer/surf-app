@@ -39,6 +39,13 @@ def server():
 
     st.write(df[['City', 'Airport', 'Rating', 'Best', 'Outbound', 'Return', 'Spots', 'Avg Dist']])
 
+    df['Rating'] = df['Rating'].astype(float)
+
+    map_df = df.nlargest(15, 'Rating')
+    map_df = map_df[['airport_lat', 'airport_lon', 'Airport']]
+    map_df.columns = ['lat', 'lon', 'Airport']
+    st.map(map_df)
+
 
 if __name__ == '__main__':
     server()

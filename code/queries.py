@@ -33,6 +33,8 @@ with flights_etl_order as (
 	select                 
 	    iata_code as "Airport"
 	    , INITCAP(city) || ', ' || INITCAP(country) as "City"
+	    , airport_lat
+	    , airport_lon
 	    , round(avg(max_10d_rating), 1) as "Rating"
 	    , round(avg(max_10d_rating), 1) + (case when count(*) > 50 then 1.5 when count(*) > 10 then 1 when count(5) > 5 then 0.25 when count(5) > 2 then -0.5 else -1.5 end) as "Ordering"
 	    , round(avg(dist)::numeric, 0)::varchar || ' mi' as "Avg Dist"
@@ -54,7 +56,7 @@ with flights_etl_order as (
 	where airport_size = 'large_airport'
 	and dist < 100
 	and (not iata_code in ('VBG', 'DNA'))
-	group by 1,2
+	group by 1,2,3,4
 	order by "Ordering" desc
 )
 
