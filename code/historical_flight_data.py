@@ -13,6 +13,8 @@ import requests
 import psycopg2
 from queries import app_query, us_airports_query, create_fare_detective_table_query
 
+f = open("password.txt", "r")
+password = f.read()
 
 def read_table_write_rows(date_cal, origin, dest):
     for table in date_cal:
@@ -55,7 +57,7 @@ def read_table_write_rows(date_cal, origin, dest):
                     'Accept-Language': 'en-US, en;q=0.5'})
 
         connection = psycopg2.connect(user="avossmeyer",
-                                      password="@9x!55yQFv#pUKER#@&$",
+                                      password=password,
                                       host="surf-forecasts.c6bioghb9ybm.us-east-2.rds.amazonaws.com",
                                       port="5432",
                                       database="postgres")
@@ -102,7 +104,7 @@ def scrape_faredetective(driver, origin='LAX', dest='DPS'):
         record = (origin, dest, lowest_historical_price, avg_historical_price, cheapest_month)
 
         connection = psycopg2.connect(user="avossmeyer",
-                                      password="@9x!55yQFv#pUKER#@&$",
+                                      password=password,
                                       host="surf-forecasts.c6bioghb9ybm.us-east-2.rds.amazonaws.com",
                                       port="5432",
                                       database="postgres")
@@ -132,7 +134,7 @@ def scrape_top_surf_airports():
                 'Accept-Language': 'en-US, en;q=0.5'})
 
     connection = psycopg2.connect(user="avossmeyer",
-                                  password="@9x!55yQFv#pUKER#@&$",
+                                  password=password,
                                   host="surf-forecasts.c6bioghb9ybm.us-east-2.rds.amazonaws.com",
                                   port="5432",
                                   database="postgres")
@@ -149,7 +151,7 @@ def scrape_top_surf_airports():
     # cursor.execute(best_iata_surf_query)
 
     connection = psycopg2.connect(user="avossmeyer",
-                                  password="@9x!55yQFv#pUKER#@&$",
+                                  password=password,
                                   host="surf-forecasts.c6bioghb9ybm.us-east-2.rds.amazonaws.com",
                                   port="5432",
                                   database="postgres")
