@@ -1,8 +1,9 @@
 import pandas as pd
 from selenium import webdriver
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
+# from selenium.webdriver.support.ui import WebDriverWait
+# from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 import multiprocessing
 import datetime
@@ -12,6 +13,9 @@ import requests
 import psycopg2
 from queries import app_query, us_airports_query, create_flight_prices_table_query
 
+
+f = open("password.txt", "r")
+password = f.read()
 
 def read_table_write_rows(date_cal, origin, dest):
 
@@ -54,7 +58,7 @@ def read_table_write_rows(date_cal, origin, dest):
 					'Accept-Language': 'en-US, en;q=0.5'})
 
 		connection = psycopg2.connect(user="avossmeyer",
-									  password="surfbro1#",
+									  password=password,
 									  host="surf-forecasts.c6bioghb9ybm.us-east-2.rds.amazonaws.com",
 									  port="5432",
 									  database="postgres")
@@ -71,10 +75,36 @@ def read_table_write_rows(date_cal, origin, dest):
 		result = cursor.executemany(postgres_insert_query, records)
 		connection.commit()
 
+def scrape_faredetective(driver, origin='LAX', dest='DPS'):
+	try:
+		URL = "https://www.faredetective.com/farehistory"
+		driver.get(URL)
+
+		elem = driver.find_element(By.ID, "fromAir")
+		elem.send_keys('SAN')
+
+		elem = driver.find_element(By.ID, "toAir")
+		elem.send_keys('ORD')
+
+		btn = driver.find_element(By.CLASS_NAME, 'btn-fare')
+		btn.click()
+
+		historical_prices = driver.find_elements(By.TAG_NAME, 'table')[0].find_elements(By.TAG_NAME, 'td')
+		lowest_historical_price = historical_prices[0].text
+		avg_historical_price = historical_prices[1].text
+		cheapest_month = historical_prices[2].text
+
+
+		# url = 'https://www.faredetective.com/farehistory'
+
 
 # Selenium (requires browser)
 def scrape_skiplagged(driver, origin='LAX', dest='DPS'):
 	try:
+
+		# driver.find_element(By.ID, "fromAir")
+		# url = 'https://www.faredetective.com/farehistory'
+
 		tom = datetime.datetime.today().date() + datetime.timedelta(days=1)
 		URL = "https://skiplagged.com/flights/{}/{}/{}".format(
 			origin,
@@ -84,6 +114,7 @@ def scrape_skiplagged(driver, origin='LAX', dest='DPS'):
 
 		time.sleep(5)
 		# trip - cost
+		import pdb; pdb.set_trace()
 
 		date = driver.find_element(By.CLASS_NAME, "hasDatepicker")
 		date.click()
@@ -158,7 +189,7 @@ def scrape_top_surf_airports():
 		'Accept-Language': 'en-US, en;q=0.5'})
 
 	connection = psycopg2.connect(user="avossmeyer",
-									password="surfbro1#",
+									password=password,
 									host="surf-forecasts.c6bioghb9ybm.us-east-2.rds.amazonaws.com",
 									port="5432",
 									database="postgres")
@@ -175,7 +206,7 @@ def scrape_top_surf_airports():
 	# cursor.execute(best_iata_surf_query)
 
 	connection = psycopg2.connect(user="avossmeyer",
-									password="surfbro1#",
+									password=password,
 									host="surf-forecasts.c6bioghb9ybm.us-east-2.rds.amazonaws.com",
 									port="5432",
 									database="postgres")
@@ -187,9 +218,15 @@ def scrape_top_surf_airports():
 
 	cursor.execute(us_airports_query)
 	us_airports = cursor.fetchall()
-
 	cursor.close()
-	driver = webdriver.Chrome()
+
+	options = Options()
+	options.add_argument('--headless=new')
+	# options.add_argument('--disable-gpu')  # Last I checked this was necessary.
+
+	driver = webdriver.Chrome(options=options)
+
+
 
 	# import pdb; pdb.set_trace()
 	# airport_codes = []
@@ -199,7 +236,7 @@ def scrape_top_surf_airports():
 		destination_iata = cur['Airport']
 
 		# for home_airport in us_airports:
-		for home_airport in [['LAX', 'SAN', 'SFO', 'JFK', 'ORD', 'SYD', 'MEL', 'PER']]:
+		for home_airport in [['LAX', 'SAN', 'SFO', 'JFK', 'ORD', 'SYD', 'MEL', 'PER', 'AKL']]:
 			home_airport = home_airport[0]
 
 			# if destination_iata == 'FLN':

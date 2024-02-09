@@ -9,6 +9,8 @@ import psycopg2
 from bs4 import BeautifulSoup
 import requests
 
+f = open("password.txt", "r")
+password = f.read()
 
 
 def scrape(elem):
@@ -19,7 +21,7 @@ def scrape(elem):
 				'Accept-Language': 'en-US, en;q=0.5'})
 
 		connection = psycopg2.connect(user="avossmeyer",
-										password="surfbro1#",
+										password=password,
 										host="surf-forecasts.c6bioghb9ybm.us-east-2.rds.amazonaws.com",
 										port="5432",
 										database="postgres")
@@ -152,8 +154,9 @@ def create_surf_ratings_table():
 		(KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36',\
 		'Accept-Language': 'en-US, en;q=0.5'})
 
+
 	connection = psycopg2.connect(user="avossmeyer",
-									password="surfbro1#",
+									password=password,
 									host="surf-forecasts.c6bioghb9ybm.us-east-2.rds.amazonaws.com",
 									port="5432",
 									database="postgres")
@@ -176,9 +179,10 @@ def create_acb_materialized_view():
 		'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 \
 		(KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36',\
 		'Accept-Language': 'en-US, en;q=0.5'})
+	print(password)
 
 	connection = psycopg2.connect(user="avossmeyer",
-									password="surfbro1#",
+									password=password,
 									host="surf-forecasts.c6bioghb9ybm.us-east-2.rds.amazonaws.com",
 									port="5432",
 									database="postgres")
@@ -212,7 +216,7 @@ def get_pages():
 			'Accept-Language': 'en-US, en;q=0.5'})
 
 	connection = psycopg2.connect(user="avossmeyer",
-									password="surfbro1#",
+									password=password,
 									host="surf-forecasts.c6bioghb9ybm.us-east-2.rds.amazonaws.com",
 									port="5432",
 									database="postgres")
@@ -231,14 +235,8 @@ def get_pages():
 
 
 if __name__ == '__main__':
-	create_surf_ratings_table()
-	pages = get_pages()
-	scrape_fast(pages)
+	# create_surf_ratings_table()
+	# pages = get_pages()
+	# scrape_fast(pages)
 	create_acb_materialized_view()
-
-
-	# 25, 35, 49
-	# 91
-
-
 

@@ -44,10 +44,11 @@ def run(df):
     #        'avg_of_best_session_for_each_break', 'Best', 'max_10d_rating',
     #        'num_good_surf_spots', 'avg_dist', 'array_agg', 'Out Price',
     #        'Return Price']].fillna('')
+
     option = st.selectbox(
         "Home Airport",
-        ("LAX"),
-        # ("SAN", "LAX", "SFO"),
+        # ("LAX", ),
+        ("SAN", "LAX", "SFO"),
         index=None,
         placeholder="Select Your Home Airport...",
     )
