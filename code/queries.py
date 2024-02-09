@@ -82,6 +82,22 @@ left join flights return_flight
 """
 
 
+create_fare_detective_table_query = """
+ DROP TABLE fare_detective; 
+
+    CREATE TABLE fare_detective
+    (
+        origin                          VARCHAR(5),
+        dest                            VARCHAR(5),
+        lowest_historical_price         VARCHAR(10),
+        avg_historical_price            VARCHAR(10),
+        cheapest_month                  VARCHAR(20),
+        etl_insert_timestamp            TIMESTAMP
+    ); 
+"""
+
+
+
 
 create_flight_prices_table_query = """
 -- DROP TABLE flight_prices; 
@@ -145,7 +161,7 @@ with airport as (
 	select 
 		RANK () OVER (
 			PARTITION BY break_name, ith_forecast
-			ORDER BY etl_insert_timestamp ASC
+			ORDER BY etl_insert_timestamp DESC
 		) etl_insert_order
 		, *
 	from surf_ratings
