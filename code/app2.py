@@ -51,7 +51,7 @@ def run(df):
     st.markdown("3. **Distance to Breaks** measures the average distance to the breaks that are rated.")
     st.markdown("4. We capture roughly **6,500** of the **10,000** global breaks.")
 
-    
+    st.markdown("\n")
 
     n_spots = 15
     n_spots = st.slider('How many airports do you want to show?', 0, df.shape[0], n_spots)
