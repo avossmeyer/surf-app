@@ -56,7 +56,6 @@ def run(df):
 
     st.title("Best Surf Worldwide (Where to Fly)")
     
-
     # st.write(df[['City', 'Airport', 'Rating', 'Best', 'Outbound', 'Return', 'Breaks', 'Dist to Breaks']])
     x = df[['City', 'Airport', 'Rating', 'Best', 'Breaks', 'Dist to Breaks']]
     x.columns = ['City', 'Airport', 'Average Rating', 'Best Rating', 'Number of Breaks', 'Dist to Breaks']
