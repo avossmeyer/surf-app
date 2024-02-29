@@ -49,7 +49,7 @@ def run(df):
     st.markdown("1. **Average rating** finds the best break within 100 miles of an airport and measures the quality of that break over the next 10 days (we have forecast data every 4 hours for the next 10 days).")
     st.markdown("2. **Best Rank** is the best 4-hour session you're going to see anywhere within 100 miles of that airport.")
     st.markdown("3. **Distance to Breaks** measures the average distance to the breaks that are rated.")
-    st.markdown("4. We capture roughly 6,500 of the 10,000 global breaks.")
+    st.markdown("4. We capture roughly **6,500** of the **10,000** global breaks.")
 
     
 
