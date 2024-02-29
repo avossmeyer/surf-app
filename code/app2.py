@@ -54,7 +54,7 @@ def run(df):
     # )
 
     # st.write(df[['City', 'Airport', 'Rating', 'Best', 'Outbound', 'Return', 'Breaks', 'Dist to Breaks']])
-    st.write(df[['City', 'Airport', 'Rating', 'Best', 'Outbound', 'Return', 'Breaks', 'Dist to Breaks']])
+    st.write(df[['City', 'Airport', 'Rating', 'Best', 'Breaks', 'Dist to Breaks']])
 
     # map_df = df.nlargest(15, 'Rating')
     # map_df = map_df[['airport_lat', 'airport_lon', 'Airport']]
