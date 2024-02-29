@@ -39,11 +39,13 @@ def run(df):
     df.index += 1 
 
     st.title("Best Surf Worldwide (Where to Fly)")
+    st.write("We rank Airports by their nearby swell. The hope is that you can find your next last-minute boys trip. Average rating is a metric I created that finds the best break within 100 miles of an airport and measures the quality of that break over the next 10 days (we have forecast data every 4 hours for the next 10 days). The best rank is the best 4-hour session you're going to see anywhere within 100 miles of that airport. And the distance to breaks measures the average distance to the breaks that are rated. We capture roughly 6,500 of the 10,000 global breaks.")
     
     x = df[['City', 'Airport', 'Rating', 'Best', 'Breaks', 'Dist to Breaks']]
     x.columns = ['City', 'Airport', 'Average Rating', 'Best Rating', 'Number of Breaks', 'Distance to Breaks']
     
     st.write(x)
+    
 
     n_spots = 15
     n_spots = st.slider('How many airports do you want to show?', 0, df.shape[0], n_spots)
