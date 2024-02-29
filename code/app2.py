@@ -59,7 +59,7 @@ def run(df):
 
     # st.write(df[['City', 'Airport', 'Rating', 'Best', 'Outbound', 'Return', 'Breaks', 'Dist to Breaks']])
     x = df[['City', 'Airport', 'Rating', 'Best', 'Breaks', 'Dist to Breaks']]
-    x.rename({'Rating': 'Average Rating', 'Best': 'Best Rating'}, inplace=True)
+    # x.rename({'Rating': 'Average Rating', 'Best': 'Best Rating'}, inplace=True)
     st.write(x)
 
     # map_df = df.nlargest(15, 'Rating')
