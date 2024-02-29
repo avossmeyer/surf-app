@@ -52,6 +52,7 @@ def run(df):
     #     index=None,
     #     placeholder="Select Your Home Airport...",
     # )
+    st.title("Best Surf Worldwide (Where to Fly)")
 
     # st.write(df[['City', 'Airport', 'Rating', 'Best', 'Outbound', 'Return', 'Breaks', 'Dist to Breaks']])
     st.write(df[['City', 'Airport', 'Rating', 'Best', 'Breaks', 'Dist to Breaks']])
