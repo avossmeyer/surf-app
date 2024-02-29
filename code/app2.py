@@ -63,7 +63,7 @@ def run(df):
     # map_df = map_df[['airport_lat', 'airport_lon', 'Airport']]
     # map_df.columns = ['lat', 'lon', 'Airport']
     n_spots = 15
-    n_spots = st.slider('Top N Airports', 0, df.shape[0], n_spots)
+    n_spots = st.slider('How many airports do you want to show?', 0, df.shape[0], n_spots)
 
     # st.map(df.nlargest(n_spots, 'Rating'), latitude='airport_lat', longitude='airport_lon')
     n_spots_df = df.nlargest(n_spots, 'Rating')
