@@ -45,14 +45,15 @@ def run(df):
     #        'num_good_surf_spots', 'avg_dist', 'array_agg', 'Out Price',
     #        'Return Price']].fillna('')
 
-    option = st.selectbox(
-        "Home Airport",
-        # ("LAX", ),
-        ("SAN", "LAX", "SFO"),
-        index=None,
-        placeholder="Select Your Home Airport...",
-    )
+    # option = st.selectbox(
+    #     "Home Airport",
+    #     # ("LAX", ),
+    #     ("SAN", "LAX", "SFO"),
+    #     index=None,
+    #     placeholder="Select Your Home Airport...",
+    # )
 
+    # st.write(df[['City', 'Airport', 'Rating', 'Best', 'Outbound', 'Return', 'Breaks', 'Dist to Breaks']])
     st.write(df[['City', 'Airport', 'Rating', 'Best', 'Outbound', 'Return', 'Breaks', 'Dist to Breaks']])
 
     # map_df = df.nlargest(15, 'Rating')
