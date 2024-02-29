@@ -53,8 +53,10 @@ def run(df):
     #     placeholder="Select Your Home Airport...",
     # )
     df.index += 1 
+    df.index += 1 
 
     st.title("Best Surf Worldwide (Where to Fly)")
+    
 
     # st.write(df[['City', 'Airport', 'Rating', 'Best', 'Outbound', 'Return', 'Breaks', 'Dist to Breaks']])
     x = df[['City', 'Airport', 'Rating', 'Best', 'Breaks', 'Dist to Breaks']]
