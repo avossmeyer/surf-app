@@ -3,10 +3,6 @@ import psycopg2
 import pandas as pd
 import plotly.express as px
 
-# display.set_matplotlib_formats("svg")
-# plt.rcParams["axes.spines.top"] = False
-# plt.rcParams["axes.spines.right"] = False
-
 @st.cache_data
 def pull_data():
     
