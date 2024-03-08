@@ -16,7 +16,11 @@ select
 	, max(avg_10d_rating) as avg_of_best_session_for_each_break
 	, max(max_10d_rating) as "Best"
 	, max(max_10d_rating) as max_10d_rating
- 	, avg(wave_height) as "Average Height"
+ 
+ 	, avg(avg_wave_height) as "Average Height Spot"
+ 	, min(avg_wave_height) as "Min Height Spot"
+  	, max(avg_wave_height) as "Max Height Spot"
+   
 	, count(*) as num_good_surf_spots
 	, avg(acb.dist) as avg_dist
 	, array_agg((break_name, acb.dist))
@@ -75,6 +79,7 @@ select
 	, max(rating) as max_10d_rating
 	, avg(rating) as avg_10d_rating
 	, sum(rating) as sum_10d_rating
+ 	, avg(wave_height) as avg_wave_height
 	, variance(rating)*count(*) as rating_variance
 	, count(*) as n
 	, avg(case when rating >= 5 then 1 else 0 end) as perc_5_plus
@@ -84,7 +89,6 @@ where lat_decimal is not null and rating <= 10
 group by 1,2,3
 )
 
---, B as (
 select 
 	iata_code
 	, airport_size
