@@ -17,9 +17,9 @@ select
 	, max(max_10d_rating) as "Best"
 	, max(max_10d_rating) as max_10d_rating
  
- 	, avg(avg_wave_height) as "Average Height Spot"
- 	, min(avg_wave_height) as "Min Height Spot"
-  	, max(avg_wave_height) as "Max Height Spot"
+ 	, round(avg(avg_wave_height), 1) as "Average Height Spot"
+ 	, round(min(avg_wave_height), 1) as "Min Height Spot"
+  	, round(max(avg_wave_height), 1) as "Max Height Spot"
    
 	, count(*) as num_good_surf_spots
 	, avg(acb.dist) as avg_dist
