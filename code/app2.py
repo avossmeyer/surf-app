@@ -39,7 +39,10 @@ def run(df):
 
     x = df[['City', 'Airport', 'Rating', 'Best', 'Breaks', 'Dist to Breaks', 'Average Height Spot']]
     x.columns = ['City', 'Airport', 'Average Rating', 'Best Rating', 'Number of Breaks', 'Distance to Breaks', 'Average Height Spot']
-    
+
+    avg_height_filter = 3
+    avg_height_filter = st.slider('Do you want to filter out airports that the average break is bigger than {} meters?'.format(avg_height_filter), 0, df.shape[0], avg_height_filter)
+
     st.write(x)
 
     st.markdown("1. **Average rating** finds the best break within 100 miles of an airport and measures the quality of that break over the next 10 days (we have forecast data every 4 hours for the next 10 days).")
