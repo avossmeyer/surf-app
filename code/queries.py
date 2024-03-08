@@ -99,6 +99,7 @@ select
 	, avg_10d_rating
 	, perc_5_plus
 	, max_10d_rating
+ 	, avg_wave_height
 	, A.dist
 	, break_name
 	, A.lat_decimal as airport_lat
