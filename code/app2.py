@@ -37,8 +37,8 @@ def run(df):
     st.title("Best Surf Worldwide (Where to Fly)")
     st.write("We rank Airports by their nearby swell. The hope is that you can find your next last-minute boys trip.")
 
-    x = df[['City', 'Airport', 'Rating', 'Best', 'Breaks', 'Dist to Breaks']]
-    x.columns = ['City', 'Airport', 'Average Rating', 'Best Rating', 'Number of Breaks', 'Distance to Breaks']
+    x = df[['City', 'Airport', 'Rating', 'Best', 'Breaks', 'Dist to Breaks', 'Average Height']]
+    x.columns = ['City', 'Airport', 'Average Rating', 'Best Rating', 'Number of Breaks', 'Distance to Breaks', 'Average Height']
     
     st.write(x)
 
