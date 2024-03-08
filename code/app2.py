@@ -37,8 +37,8 @@ def run(df):
     st.title("Best Surf Worldwide (Where to Fly)")
     st.write("We rank Airports by their nearby swell. The hope is that you can find your next last-minute boys trip.")
 
-    # x = df[['City', 'Airport', 'Rating', 'Best', 'Breaks', 'Average Height Spot', 'Distance to Breaks']]
-    # x.columns = ['City', 'Airport', 'Average Rating', 'Best Rating', 'Number of Breaks', 'Average Height Spot', 'Distance to Breaks']
+    # x = df[['City', 'Airport', 'Rating', 'Best', 'Average Height Spot', 'Breaks', 'Distance to Breaks']]
+    # x.columns = ['City', 'Airport', 'Avg Rating', 'Best Rating', 'Avg Height', 'Number of Breaks', 'Distance to Breaks']
 
     # avg_height_filter = 3
     # avg_height_filter = st.slider('Do you want to filter out airports that the average break is bigger than {} meters?'.format(avg_height_filter), 0, 5, avg_height_filter)
