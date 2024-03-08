@@ -3,27 +3,28 @@
 
 app_query = app_query = """
 select                 
-    iata_code as "Airport"
-    , INITCAP(city) || ', ' || INITCAP(country) as "City"
-    , airport_lat
-    , airport_lon
-    , round(avg(max_10d_rating), 1) as "Rating"
-    , round(avg(max_10d_rating), 1) + (case when count(*) > 50 then 1.5 when count(*) > 10 then 1 when count(5) > 5 then 0.25 when count(5) > 2 then -0.5 else -1.5 end) as "Ordering"
-    , round(avg(dist)::numeric, 0)::varchar || ' mi' as "Dist to Breaks"
-    , count(*) as "Breaks"
-    , round(avg(perc_5_plus)*100, 1)::varchar as "% 5+"
-    
---	    , sum(sum_10d_rating) / sum(n) as avg_10d_rating
-, max(avg_10d_rating) as avg_of_best_session_for_each_break
-, max(max_10d_rating) as "Best"
-, max(max_10d_rating) as max_10d_rating
---        , sqrt(sum(rating_variance) / sum(n)) as rating_stddev
-, count(*) as num_good_surf_spots
-, avg(acb.dist) as avg_dist
-, array_agg((break_name, acb.dist))
+	iata_code as "Airport"
+	, INITCAP(city) || ', ' || INITCAP(country) as "City"
+	, airport_lat
+	, airport_lon
+ 
+	, round(avg(max_10d_rating), 1) as "Rating"
+	, round(avg(max_10d_rating), 1) + (case when count(*) > 50 then 1.5 when count(*) > 10 then 1 when count(5) > 5 then 0.25 when count(5) > 2 then -0.5 else -1.5 end) as "Ordering"
+	, round(avg(dist)::numeric, 0)::varchar || ' mi' as "Dist to Breaks"
+	, count(*) as "Breaks"
+	, round(avg(perc_5_plus)*100, 1)::varchar as "% 5+"
+	, max(avg_10d_rating) as avg_of_best_session_for_each_break
+	, max(max_10d_rating) as "Best"
+	, max(max_10d_rating) as max_10d_rating
+ 	, avg(wave_height) as "Average Height"
+	, count(*) as num_good_surf_spots
+	, avg(acb.dist) as avg_dist
+	, array_agg((break_name, acb.dist))
 
-    --, array_agg((break_name, b.dist))
-    --, array_agg(break_name) as Breaks
+-- , sqrt(sum(rating_variance) / sum(n)) as rating_stddev
+-- , sum(sum_10d_rating) / sum(n) as avg_10d_rating
+-- , array_agg((break_name, b.dist))
+-- , array_agg(break_name) as Breaks
 from airports_closest_breaks acb
 where airport_size = 'large_airport'
 and dist < 100
