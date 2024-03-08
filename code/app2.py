@@ -48,8 +48,8 @@ def run(df):
     x = df[['City', 'Airport', 'Rating', 'Best', 'Breaks', 'Dist to Breaks', 'Average Height Spot']]
     x.columns = ['City', 'Airport', 'Average Rating', 'Best Rating', 'Number of Breaks', 'Distance to Breaks', 'Average Height Spot']
 
-    avg_height_filter = 3
-    avg_height_filter = st.slider('Do you want to filter out airports that the average break is bigger than {} meters?'.format(avg_height_filter), 0, 5, avg_height_filter)
+    # avg_height_filter = 3
+    # avg_height_filter = st.slider('Do you want to filter out airports that the average break is bigger than {} meters?'.format(avg_height_filter), 0, 5, avg_height_filter)
 
     st.write(x)
 
